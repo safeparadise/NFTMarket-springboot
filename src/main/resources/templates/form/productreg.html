@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body >
+
+<div th:object="${products}"></div>
+
+<input type="text" placeholder="name" th:field="*{products.product_name}">
+<input type="text" placeholder="password" th:field="*{products.price}">
+<input type="text" placeholder="description" th:field="*{products.description}">
+<input type="text" placeholder="price" th:field="*{products.id}">
+<input type="button" value="submit">
+
+</body>
+</html>
