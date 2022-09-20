@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -20,16 +21,14 @@ import com.example.demo.service.Roles;
 @Table(name = "users")
 public class Users implements Serializable {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String password;
 	private String username;
-	private boolean enabled = true;
+	private int enabled;
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+	
 
 	public String getPassword() {
 		return password;
@@ -39,7 +38,11 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	public void setEnabled(boolean enabled) {
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
 		this.enabled = enabled;
 	}
 
@@ -83,8 +86,6 @@ public class Users implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
 
 	public String getUsername() {
 		return username;

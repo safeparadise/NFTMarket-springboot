@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard - NFTMarket</title>
+    <div th:replace="fragment/adminPanel::header-links"></div>
+</head>
+
+<body class="sb-nav-fixed">
+  
+  <!-- navbar top -->
+  <div th:replace="fragment/adminPanel::navbar-up"></div>
+  
+    <div id="layoutSidenav">
+  <!-- side navbar -->
+		<div th:replace="fragment/adminPanel::sidenav"></div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                <!-- breadcrumb -->
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Users</li>
+                    </ol>
+                    <!-- body of the panel contain of content and tables ------------------------------------------>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table "></i>
+                            DataTable Example
+                        </div>
+                        <div class="card-body" th:Object="${userDetails}">
+                           <input type="text" th:field="*{id}">
+                           <input type="text" th:field="*{name}">
+                           <input type="text" th:field="*{username}">
+                        </div>
+                    </div>
+<!--                     ----------------------------------------------------------------------------------------------------- -->
+                </div>
+            </main>
+            <div th:replace="~{'fragment/adminPanel' :: footer-adminPanel}"></div>
+        </div>
+    </div>
+     <div th:replace="fragment/adminPanel::script"></div>
+</body>
+
+</html>

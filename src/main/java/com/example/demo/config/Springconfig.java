@@ -28,8 +28,12 @@ public class Springconfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-		.authorizeRequests().antMatchers("/","/css/**","/js/**","/img/**","/loginUser/**","/productsTbl","/pro","/product/**","/edit/**")
-		.permitAll().antMatchers("/products/**").hasAuthority("ADMIN")
+		.authorizeRequests().antMatchers(
+				"/","/css/**","/js/**","/img/**","/loginUser/**","/users/**","/uploadFile/**","/webfonts/**",
+				"/get/**","/productsList/**","/collectionList/**","/artists/**",
+				"/productsTbl","/pro","/product/**","/edit/**","/notfound/**","/redirect"
+				,"/admin/**"
+				).permitAll().antMatchers("/products/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated().and().formLogin().loginPage("/login").usernameParameter("username").permitAll().and().logout().permitAll()
 		.and().exceptionHandling().accessDeniedPage("/notfound");
 	}

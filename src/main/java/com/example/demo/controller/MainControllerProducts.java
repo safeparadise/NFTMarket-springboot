@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Products;
 import com.example.demo.models.Users;
+import com.example.demo.service.CollectionService;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.UserService;
 
 @Controller
+@RequestMapping("/admin")
 public class MainControllerProducts {
 	
 	private ProductService productservice;
@@ -27,35 +30,35 @@ public class MainControllerProducts {
 	public MainControllerProducts(ProductService productsservice) {
 		this.productservice = productsservice;
 	}
-
-	@RequestMapping("/")
-	public String index(Model model){
-		model.addAttribute("products",productservice.getAllProducts());
+	//finish router pages
+	
+	@RequestMapping(value={"/p"}, method=RequestMethod.POST)
+	public String addProducts(@ModelAttribute Products product) throws IOException{
+		System.out.println("----------------------------------------");
+//		System.out.println(product.getPrice());
+//		System.out.println(product.getImg());
+//		System.out.println(productservice.registerIMG(product));
+		productservice.registerIMG(product);
+		System.out.println("----------------------------------------");
 		return "index.html";
 	}
 	
-	@RequestMapping("/notfound")
-	public String Notfound(Model model){
-		return "user/notfound.html";
+	@RequestMapping(value="/product/edit/{id}", method=RequestMethod.GET)
+	public String editProduct(Model model,@PathVariable("id") int id){
+		model.addAttribute("product",productservice.findByIdProduct(id));
+		return "/AdminPanel/productEdit.html";
 	}
 	
-	@RequestMapping(value={"/product"}, method=RequestMethod.GET)
-	public@ResponseBody Products addProducts( Products product){
-		return productservice.addProducts(product);
+	
+	@RequestMapping("/products")
+	public String listProducts(Model model){
+		model.addAttribute("products", productservice.getAllProducts());
+		return "/AdminPanel/products.html";
 	}
 	
-	@RequestMapping(value={"/pro"}, method=RequestMethod.GET)
-	public@ResponseBody List<Products> getting(){
-		return productservice.getAllProducts();
-	}
-	
-	@RequestMapping(value={"/products"}, method=RequestMethod.POST)
-	public Products addProductsImges(@ModelAttribute Products product) throws IOException{
-		return productservice.registerIMG(product);
-	}
-	@RequestMapping("/login" )
-	public String login(){
-		return "/user/login.html";
+	@RequestMapping(value={"/product/add"}, method=RequestMethod.GET)
+	public String addNewProduct(){
+		return "AdminPanel/productEdit.html";
 	}
 	
 	@RequestMapping("/productsTbl")
@@ -64,9 +67,9 @@ public class MainControllerProducts {
 		return "/form/producttbl.html";
 	}
 	
-	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
-	public String editProduct(Model model,@PathVariable("id") int id){
-		model.addAttribute("products",productservice.findByIdProduct(id));
-		return "/form/productreg.html";
+	
+	@RequestMapping(value="/get", method=RequestMethod.GET)
+	public@ResponseBody List<Products> getFourProduct(){
+		return productservice.gettingFour();
 	}
 }

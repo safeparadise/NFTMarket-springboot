@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -14,12 +15,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="products")
 public class Products {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String product_name;
 	private int price;
 	private String description;
 	private String img;
+	private int category;
+	private int creator;
+	private int collection;
+	private int likes;
+	private int showing ;
 	
 	@Transient
 	@JsonIgnore
@@ -29,13 +35,59 @@ public class Products {
 		super();
 	}
 
-	public Products(int id, String product_name, int price, String description, String img) {
+	public Products(int id, String product_name, int price, String description, String img, int category, int creator,
+			int collection, int likes, int view) {
 		super();
 		this.id = id;
 		this.product_name = product_name;
 		this.price = price;
 		this.description = description;
 		this.img = img;
+		this.category = category;
+		this.creator = creator;
+		this.collection = collection;
+		this.likes = likes;
+		this.showing = view;
+	}
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
+	}
+
+	public int getCreator() {
+		return creator;
+	}
+
+	public void setCreator(int creator) {
+		this.creator = creator;
+	}
+
+	public int getCollection() {
+		return collection;
+	}
+
+	public void setCollection(int collection) {
+		this.collection = collection;
+	}
+
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int like) {
+		this.likes = like;
+	}
+
+	public int getShowing() {
+		return showing;
+	}
+
+	public void setShowing(int showing) {
+		this.showing = showing;
 	}
 
 	public String getImg() {
@@ -87,7 +139,4 @@ public class Products {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-
 }
