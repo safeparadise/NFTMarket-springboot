@@ -28,8 +28,6 @@ public class Users implements Serializable {
 	private String username;
 	private int enabled;
 
-	
-
 	public String getPassword() {
 		return password;
 	}

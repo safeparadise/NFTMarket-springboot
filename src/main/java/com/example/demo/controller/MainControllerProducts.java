@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Products;
 import com.example.demo.models.Users;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.CollectionService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
@@ -25,30 +26,16 @@ import com.example.demo.service.UserService;
 public class MainControllerProducts {
 	
 	private ProductService productservice;
+	private CollectionService collectionService;
+	private CategoryService categoryService;
 	
 	@Autowired
-	public MainControllerProducts(ProductService productsservice) {
+	public MainControllerProducts(ProductService productsservice,CollectionService collectionService,CategoryService categoryService) {
 		this.productservice = productsservice;
+		this.collectionService = collectionService;
+		this.categoryService = categoryService;
 	}
 	//finish router pages
-	
-	@RequestMapping(value={"/p"}, method=RequestMethod.POST)
-	public String addProducts(@ModelAttribute Products product) throws IOException{
-		System.out.println("----------------------------------------");
-//		System.out.println(product.getPrice());
-//		System.out.println(product.getImg());
-//		System.out.println(productservice.registerIMG(product));
-		productservice.registerIMG(product);
-		System.out.println("----------------------------------------");
-		return "index.html";
-	}
-	
-	@RequestMapping(value="/product/edit/{id}", method=RequestMethod.GET)
-	public String editProduct(Model model,@PathVariable("id") int id){
-		model.addAttribute("product",productservice.findByIdProduct(id));
-		return "/AdminPanel/productEdit.html";
-	}
-	
 	
 	@RequestMapping("/products")
 	public String listProducts(Model model){
@@ -56,9 +43,35 @@ public class MainControllerProducts {
 		return "/AdminPanel/products.html";
 	}
 	
-	@RequestMapping(value={"/product/add"}, method=RequestMethod.GET)
-	public String addNewProduct(){
+	@RequestMapping("/product/add")
+	public String addNewProduct(Model model){
+		model.addAttribute("optionsCollection", collectionService.getAllcollection());
+		model.addAttribute("optionsCategory", categoryService.getAllCategorys());
 		return "AdminPanel/productEdit.html";
+	}
+	
+	@RequestMapping(value={"/registerProduct"}, method=RequestMethod.POST)
+	public String addProducts(@ModelAttribute Products product) throws IOException{
+		System.out.println("----------------------------------------");
+		productservice.uploadFile(product);
+		System.out.println("----------------------------------------");
+		return "redirect:/admin/products";
+	}
+	
+	@RequestMapping(value="/product/edit/{id}", method=RequestMethod.GET)
+	public String editProduct(Model model,@PathVariable("id") int id){
+		model.addAttribute("product",productservice.findByIdProduct(id));
+		model.addAttribute("optionsCollection", collectionService.getAllcollection());
+		model.addAttribute("optionsCategory", categoryService.getAllCategorys());
+		return "/AdminPanel/productEdit.html";
+	}
+	
+	@RequestMapping(value={"/editProductParams"}, method=RequestMethod.POST)
+	public String editProductParams(@ModelAttribute Products product) throws IOException{
+		System.out.println("----------------------------------------");
+		productservice.uploadFile(product);
+		System.out.println("----------------------------------------");
+		return "redirect:/admin/products";
 	}
 	
 	@RequestMapping("/productsTbl")
@@ -66,7 +79,6 @@ public class MainControllerProducts {
 		model.addAttribute("products",productservice.getAllProducts());
 		return "/form/producttbl.html";
 	}
-	
 	
 	@RequestMapping(value="/get", method=RequestMethod.GET)
 	public@ResponseBody List<Products> getFourProduct(){

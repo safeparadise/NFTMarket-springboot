@@ -31,15 +31,108 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            product table
+                            product inputs
                         </div>
 						<!-- this is for the edit page -->
                         <div class="card-body" th:if="${product!=null}">
-                           <input type="text" th:field="${product.id}" name="id" >
+                        <div class="row">
+	                        <div class="col-6">
+	                        <img th:src="'/img/' + ${product.img}" th:alt="${product.img}" width="100px"/>
+	                        </div>
+	                     </div>
+                        <form th:action="@{/admin/editProductParams}" method="post" enctype="multipart/form-data">
+                         <div class="row">
+	                        <div class="col-6">
+	                        <label>image</label><br>
+	                        <input type="file" name="file"  />
+	                        </div>
+	                      </div>
+	                      <input type="hidden"  name="id"  th:field="${product.id}">
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>name</label><br>
+	                            <input type="text" placeholder="name" name="product_name" class="w-100" th:field="${product.product_name}">
+	                        </div>
+	                        <div class="col-6">
+	                         <label>price</label><br>
+	                            <input type="number" placeholder="price" name="price" class="w-100" th:field="${product.price}">
+	                        </div>
+                        </div>
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>collection</label><br>
+	                            <select class="w-100 p-1" >
+	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
+	                            </select>
+	                        </div>
+	                        <div class="col-6">
+	                         <label>category</label><br>
+	                          <select class="w-100 p-1" >
+	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
+	                          </select>
+	                        </div>
+                        </div>
+                        <div class="row">
+	                        <div class="col-12">
+	                            <label>description</label><br>
+	                            <textarea type="text" placeholder="description" name="description" class="w-100" row="5" th:field="${product.description}"></textarea>
+	                        </div>
+                        </div>
+                         <div class="row mt-2">
+	                        <div class="col-6">
+	                        <input type="submit" value="save changes" class="btn btn-primary"/>
+	                        </div>
+	                        <div class="col-6">
+	                        <input type="submit" value="cancel" class="btn btn-danger"/>
+	                        </div>
+	                     </div>
+                        </form>
                         </div>
 						<!--  this is for the adding product -->
                         <div class="card-body" th:if="${product==null}">
-                           <input type="text" placeholder="this para" name="id" >
+                        <form th:action="@{/admin/registerProduct}" method="post" enctype="multipart/form-data">
+                         <div class="row">
+	                        <div class="col-6">
+	                        <label>image</label><br>
+	                        <input type="file" name="file" />
+	                        </div>
+	                      </div>
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>name</label><br>
+	                            <input type="text" placeholder="name" name="product_name" class="w-100">
+	                        </div>
+	                        <div class="col-6">
+	                         <label>price</label><br>
+	                            <input type="number" placeholder="price" name="price" class="w-100">
+	                        </div>
+                        </div>
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>collection</label><br>
+	                            <select class="w-100 p-1" >
+	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
+	                            </select>
+	                        </div>
+	                        <div class="col-6">
+	                         <label>category</label><br>
+	                          <select class="w-100 p-1" >
+	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
+	                          </select>
+	                        </div>
+                        </div>
+                        <div class="row">
+	                        <div class="col-12">
+	                            <label>description</label><br>
+	                            <textarea type="text" placeholder="description" name="description" class="w-100" row="5"></textarea>
+	                        </div>
+                        </div>
+                         <div class="row mt-2">
+	                        <div class="col-5">
+	                        <input type="submit" value="save" class="btn btn-primary"/>
+	                        </div>
+	                     </div>
+                        </form>
                         </div>
                     </div>
 <!--                     ----------------------------------------------------------------------------------------------------- -->

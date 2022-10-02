@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,7 @@ public class MainControllerCollections {
 	}
 	
 	@RequestMapping("/collection/create")
-	public String createCollection(Collection collection){
+	public String createCollection(Collection collection) throws IOException{
 		collectionService.addCollection(collection);
 		return "redirect:/admin/collections";
 	}

@@ -32,7 +32,7 @@ public class Springconfig extends WebSecurityConfigurerAdapter{
 				"/","/css/**","/js/**","/img/**","/loginUser/**","/users/**","/uploadFile/**","/webfonts/**",
 				"/get/**","/productsList/**","/collectionList/**","/artists/**",
 				"/productsTbl","/pro","/product/**","/edit/**","/notfound/**","/redirect"
-				,"/admin/**"
+				,"/admin/**","/uploadfile/**","/up/**"
 				).permitAll().antMatchers("/products/**").hasAuthority("ADMIN")
 		.anyRequest().authenticated().and().formLogin().loginPage("/login").usernameParameter("username").permitAll().and().logout().permitAll()
 		.and().exceptionHandling().accessDeniedPage("/notfound");

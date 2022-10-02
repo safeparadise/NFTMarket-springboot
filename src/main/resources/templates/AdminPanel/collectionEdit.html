@@ -31,28 +31,77 @@
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            collection table
+                            collection inputs
                         </div>
 						<!-- this is for the edit page -->
-						<form th:action="@{/admin/collection/create}" th:if="${collection!=null}">
-                        <div class="card-body" >
-                           <input type="text" th:field="${collection.name}" name="name" placeholder="name" >
-                           <input type="text" th:field="${collection.creator}" name="creator" placeholder="creator" >
-                           <input type="text" th:field="${collection.creator_img}" name="creator_img" placeholder="creator_img" >
-                           <input type="text" th:field="${collection.cover}" name="cover" placeholder="cover" >
+                        <div class="card-body" th:if="${collection!=null}">
+                        <div class="row">
+	                        <div class="col-6">
+	                        <img th:src="'/img/' + ${collection.cover}" th:alt="${collection.cover}" width="100px"/>
+	                        </div>
+	                     </div> 
+						<form th:action="@{/admin/collection/create}"  method="post" enctype="multipart/form-data">
+						 <div class="row">
+	                        <div class="col-6">
+	                        <label>image</label><br>
+	                        <input type="file" name="file"  />
+	                        </div>
+	                      </div>
+	                      <input type="hidden"  name="id"  th:field="${collection.id}">
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>name</label><br>
+	                        	<input type="text" th:field="${collection.name}" name="name" placeholder="name" class="w-100">
+	                        </div>
+	                        <div class="col-6">
+	                         <label>creator</label><br>
+	                         <input type="text" th:field="${collection.creator}" name="creator" placeholder="creator" class="w-100">
+	                        </div>
                         </div>
+                         <div class="row mt-2">
+	                        <div class="col-6">
+	                        <input type="submit" value="save changes" class="btn btn-primary w-100"/>
+	                        </div>
+	                        <div class="col-6">
+	                        	<input type="submit" value="cancel" class="btn btn-danger w-100"/>
+	                        </div>
+	                     </div>
                         </form>
-						<!--  this is for the adding product -->
-						<form action="@{/admin/collection/create}" th:if="${collection==null}">
-                        <div class="card-body" >
-                           <input type="text" name="name" placeholder="name" >
-                           <input type="text" name="creator" placeholder="creator" >
-                           <input type="text" name="creator_img" placeholder="creator_img" >
-                           <input type="text" name="cover" placeholder="cover" >
                         </div>
-                        <a th:href="@{/admin/collection/create}" class="btn btn-primary m-3">save</a>
-						
-						</form>
+						<!--  this is for the adding collection -->
+						<div class="card-body" th:if="${collection==null}">
+                        <div class="row">
+	                        <div class="col-6">
+	                        <img src="/img/favicon.ico" alt="img.png" width="100px"/>
+	                        </div>
+	                     </div> 
+						<form th:action="@{/admin/collection/create}"  method="post" enctype="multipart/form-data">
+						 <div class="row">
+	                        <div class="col-6">
+	                        <label>image</label><br>
+	                        <input type="file" name="file"  />
+	                        </div>
+	                      </div>
+                        <div class="row">
+	                        <div class="col-6">
+	                        	<label>name</label><br>
+	                        	<input type="text" name="name" placeholder="name" class="w-100">
+	                        </div>
+	                        <div class="col-6">
+	                         <label>creator</label><br>
+	                         <input type="text" name="creator" placeholder="creator" class="w-100">
+	                        </div>
+                        </div>
+                        <div class="row mt-2">
+	                        <div class="col-6">
+	                        <input type="submit" value="save" class="btn btn-primary w-100"/>
+	                        </div>
+	                        <div class="col-6">
+	                        <input type="submit" value="cancel" class="btn btn-danger w-100"/>
+	                        </div>
+	                     </div>
+                        </form>
+                        </div>
                     </div>
 <!--                     ----------------------------------------------------------------------------------------------------- -->
                 </div>

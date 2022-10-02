@@ -25,35 +25,33 @@
                 <!-- breadcrumb -->
                     <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
-                        <li class="breadcrumb-item active">Users</li>
+                        <li class="breadcrumb-item active">category</li>
                     </ol>
                     <!-- body of the panel contain of content and tables ------------------------------------------>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            DataTable Example
+                            category table
                         </div>
                         <div class="card-body">
-                          <a th:href="@{/admin/user/add}" class="btn btn-primary m-3">Add New </a>
+                        <a th:href="@{/admin/category/add}" class="btn btn-primary m-3">Add New </a>
                             <table class="table table-striped text-center" >
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>Name</th>
-                                        <th>Username</th>
-                                        <th>Mobile</th>
+                                        <th>title</th>
+                                        <th>creator</th>
                                         <th>Delete</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="users : ${users}">
-                                        <td th:text="${users.getId()}"></td>
-                                        <td th:text="${users.getName()}"></td>
-                                        <td th:text="${users.getUsername()}"></td>
-                                        <td>61</td>
+                                    <tr th:each="categories : ${categories}">
+                                        <td th:text="${categories.getId()}"></td>
+                                        <td th:text="${categories.getTitle()}"></td>
+                                        <td th:text="${categories.getCreator()}"></td>
                                         <td><a href=""><i class="fa fa-times text-danger"></i></a></td>
-                                        <td><a th:href="@{/admin/users/edit/{id}(id=${users.getId()})}"><i class="fa fa-edit"></i></a></td>
+                                        <td><a th:href="@{/admin/category/edit/{id}(id=${categories.getId()})}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>

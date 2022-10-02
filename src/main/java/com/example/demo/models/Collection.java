@@ -5,6 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="collection")
@@ -14,10 +19,20 @@ public class Collection {
 	private int id;
 	private int creator;
 	private String name;
-	private String creator_img;
 	private String cover;
 	
+	@JsonIgnore
+	@Transient
+	private MultipartFile file;
 	 
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	public Collection() {
 		super();
 	}
@@ -27,7 +42,6 @@ public class Collection {
 		this.id = id;
 		this.creator = creator;
 		this.name = name;
-		this.creator_img = creator_img;
 		this.cover = cover;
 	}
 	public int getId() {
@@ -49,14 +63,6 @@ public class Collection {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCreator_img() {
-		return creator_img;
-	}
-
-	public void setCreator_img(String creator_img) {
-		this.creator_img = creator_img;
 	}
 
 	public String getCover() {

@@ -34,15 +34,29 @@ public class MainControllerUsers {
 		return userService.addUser(users);
 	}
 	
-	@RequestMapping("/users" )
+	@RequestMapping("/users")
 	public String usersAdminPanel(Model model){
 		model.addAttribute("users", userService.getAllUsers());
 		return "/AdminPanel/users.html";
 	}
+	
+	@RequestMapping("/user/add")
+	public String userAdd(){
+		return "/AdminPanel/usersEdit.html";
+	}
+	
+	@RequestMapping("/user/create")
+	public String createUser(@ModelAttribute Users user){
+		userService.addUser(user);
+		return "redirect:/admin/users";
+	}
+	
 	@RequestMapping(value="/users/edit/{id}",method=RequestMethod.GET )
 	public String usersEdit(Model model,@PathVariable("id") int id){
 		model.addAttribute("userDetails", userService.findByID(id));
 		System.out.println(userService.findByID(id).getId());
 		return "/AdminPanel/usersEdit.html";
 	}
+	
+//	/user/add
 }
