@@ -23,7 +23,7 @@
             <main>
                 <div class="container-fluid px-4 ">
                 <!-- breadcrumb -->
-                    <ol class="breadcrumb mb-4 ">
+                    <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
                         <li class="breadcrumb-item active">categories</li>
                     </ol>
@@ -59,7 +59,7 @@
                         </div>
 						<!--  this is for the adding product -->
                         <div class="card-body" th:if="${categories==null}">
-                        <form th:action="@{/admin/category/create}" method="get" >
+                        <form th:action="@{/admin/categories/save}" method="get" >
                         <div class="row">
 	                        <div class="col-6">
 	                        	<label>title</label><br>

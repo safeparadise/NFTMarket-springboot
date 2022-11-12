@@ -23,27 +23,34 @@ public class MainControllerCategory {
 		this.categorysService = categoryService;
 	}
 	
-	@RequestMapping("/categoryies")
+	@RequestMapping("/categories")
 	public String categoryTable(Model model){
 		model.addAttribute("categories", categorysService.getAllCategorys());
 		return "/AdminPanel/category.html";
 	}
 	
-	@RequestMapping("/category/add")
+	@RequestMapping("/categories/add")
 	public String addingCategory(){
 		return "/AdminPanel/categoryEdit.html";
 	}
 	
-	@RequestMapping(value="/category/create", method=RequestMethod.GET)
+	@RequestMapping(value="/categories/save", method=RequestMethod.GET)
 	public String rediretToCategoryTable(@ModelAttribute Categorys categories){
 		categorysService.addCategory(categories);
-		return "redirect:/admin/categoryies";
+		return "redirect:/admin/categories";
 	}
 	
-	@RequestMapping(value="/category/edit/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/categories/edit/{id}", method=RequestMethod.GET)
 	public String editingTheCategory(Model model, @PathVariable("id") int id){
 		model.addAttribute("categories", categorysService.editById(id));
 		return "/AdminPanel/categoryEdit.html";
+	}
+	
+	@RequestMapping(value="categories/delete/{id}",method=RequestMethod.GET)
+	public String delete(@PathVariable("id") int id){
+		 categorysService.delete(id);
+		 return "redirect:/admin/categories";
+		 
 	}
 	
 	@RequestMapping(value="/editCategoryParams", method=RequestMethod.GET)

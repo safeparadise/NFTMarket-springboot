@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import com.example.demo.service.Roles;
-import com.example.demo.service.Roles;
 
 @Entity
 @Table(name = "users")
@@ -26,7 +24,7 @@ public class Users implements Serializable {
 	private String name;
 	private String password;
 	private String username;
-	private int enabled;
+	private boolean enabled= true;
 
 	public String getPassword() {
 		return password;
@@ -36,27 +34,38 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	public int getEnabled() {
+	
+//	public int getEnabled() {
+//		return enabled;
+//	}
+//
+//	public void setEnabled(int enabled) {
+//		this.enabled = enabled;
+//	}
+
+	public boolean isEnabled() {
 		return enabled;
 	}
 
-	public void setEnabled(int enabled) {
+	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-	@ElementCollection(targetClass = Roles.class)
-	@CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
-	@Enumerated(EnumType.STRING)
-	private List<Roles> roles;
 
-	public List<Roles> getRoles() {
-		return roles;
-	}
+//	@ElementCollection(targetClass = Roles.class)
+//	@CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
+//	@Enumerated(EnumType.STRING)
+//	private List<Roles> authorities ;
+//
+//	public List<Roles> getRoles() {
+//		return authorities ;
+//	}
+//
+//	public void setRoles(List<Roles> roles) {
+//		this.authorities  = roles;
+//	}
 
-	public void setRoles(List<Roles> roles) {
-		this.roles = roles;
-	}
-
+	
 	public Users() {
 		super();
 	}

@@ -34,7 +34,7 @@
                             product table
                         </div>
                         <div class="card-body">
-                        <a th:href="@{/admin/product/add}" class="btn btn-primary m-3">Add New </a>
+                        <a th:href="@{/admin/products/add}" class="btn btn-primary m-3">Add New </a>
                             <table class="table table-striped text-center" >
                                 <thead>
                                     <tr>
@@ -52,8 +52,38 @@
                                         <td th:text="${products.getProduct_name()}"></td>
                                         <td th:text="${products.getDescription()}"></td>
                                         <td th:text="${products.getPrice()}"></td>
-                                        <td><a href=""><i class="fa fa-times text-danger"></i></a></td>
-                                        <td><a th:href="@{/admin/product/edit/{id}(id=${products.getId()})}"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="#" data-toggle="modal"
+										th:data-target="'#delete'+ ${products.getId()}"><i class="fa fa-times text-danger"></i></a>
+                                        
+                                        	 <!-- 										_______________________________________________________________________ -->
+										<div class="modal" th:id="'delete'+ ${products.getId()}">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title">Modal Heading</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body" th:text="'you sure to delete '+${products.getProduct_name()}"></div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															data-dismiss="modal">Close</button>
+															<a type="button" class="btn btn-danger"
+															th:href="@{/admin/products/delete/{id}(id=${products.getId()})}">delete</a>
+													</div>
+
+												</div>
+											</div>
+										</div> <!--                             ____________________________________________________________________ -->
+				
+                                        
+                                        </td>
+                                        <td><a th:href="@{/admin/products/edit/{id}(id=${products.getId()})}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>

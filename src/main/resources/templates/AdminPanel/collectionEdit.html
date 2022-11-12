@@ -23,7 +23,7 @@
             <main>
                 <div class="container-fluid px-4">
                 <!-- breadcrumb -->
-                    <ol class="breadcrumb mb-4">
+                    <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
                         <li class="breadcrumb-item active">collection</li>
                     </ol>
@@ -40,7 +40,7 @@
 	                        <img th:src="'/img/' + ${collection.cover}" th:alt="${collection.cover}" width="100px"/>
 	                        </div>
 	                     </div> 
-						<form th:action="@{/admin/collection/create}"  method="post" enctype="multipart/form-data">
+						<form th:action="@{/admin/collections/save}"  method="post" enctype="multipart/form-data">
 						 <div class="row">
 	                        <div class="col-6">
 	                        <label>image</label><br>
@@ -75,7 +75,7 @@
 	                        <img src="/img/favicon.ico" alt="img.png" width="100px"/>
 	                        </div>
 	                     </div> 
-						<form th:action="@{/admin/collection/create}"  method="post" enctype="multipart/form-data">
+						<form th:action="@{/admin/collections/save}"  method="post" enctype="multipart/form-data">
 						 <div class="row">
 	                        <div class="col-6">
 	                        <label>image</label><br>

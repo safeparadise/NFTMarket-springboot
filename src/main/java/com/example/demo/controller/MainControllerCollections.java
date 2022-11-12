@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.models.Collection;
 import com.example.demo.service.CollectionService;
@@ -28,20 +29,27 @@ public class MainControllerCollections {
 		return "/AdminPanel/collection.html";
 	}
 	
-	@RequestMapping("/collection/edit/{id}")
+	@RequestMapping("/collections/add")
+	public String collectionAdd(){
+		return "/AdminPanel/collectionEdit.html";
+	}
+	
+	@RequestMapping("/collections/save")
+	public String createCollection(Collection collection) throws IOException{
+		collectionService.addCollection(collection);
+		return "redirect:/admin/collections";
+	}
+	
+	@RequestMapping("/collections/edit/{id}")
 	public String collectionEdit(@PathVariable("id") int id, Model model){
 		model.addAttribute("collection", collectionService.getCollection(id));
 		return "/AdminPanel/collectionEdit.html";
 	}
 	
-	@RequestMapping("/collection/add")
-	public String collectionAdd(){
-		return "/AdminPanel/collectionEdit.html";
+	@RequestMapping(value="collections/delete/{id}",method=RequestMethod.GET)
+	public String delete(@PathVariable("id") int id){
+		 collectionService.delete(id);
+		 return "redirect:/admin/collections";
 	}
 	
-	@RequestMapping("/collection/create")
-	public String createCollection(Collection collection) throws IOException{
-		collectionService.addCollection(collection);
-		return "redirect:/admin/collections";
-	}
 }

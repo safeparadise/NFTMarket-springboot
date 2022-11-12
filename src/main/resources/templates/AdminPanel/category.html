@@ -25,16 +25,16 @@
                 <!-- breadcrumb -->
                     <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
-                        <li class="breadcrumb-item active">category</li>
+                        <li class="breadcrumb-item active">categories</li>
                     </ol>
                     <!-- body of the panel contain of content and tables ------------------------------------------>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            category table
+                            categories table
                         </div>
                         <div class="card-body">
-                        <a th:href="@{/admin/category/add}" class="btn btn-primary m-3">Add New </a>
+                        <a th:href="@{/admin/categories/add}" class="btn btn-primary m-3">Add New </a>
                             <table class="table table-striped text-center" >
                                 <thead>
                                     <tr>
@@ -50,8 +50,37 @@
                                         <td th:text="${categories.getId()}"></td>
                                         <td th:text="${categories.getTitle()}"></td>
                                         <td th:text="${categories.getCreator()}"></td>
-                                        <td><a href=""><i class="fa fa-times text-danger"></i></a></td>
-                                        <td><a th:href="@{/admin/category/edit/{id}(id=${categories.getId()})}"><i class="fa fa-edit"></i></a></td>
+                                        <td><a href="#" data-toggle="modal"
+										th:data-target="'#delete'+ ${categories.getId()}"><i class="fa fa-times text-danger"></i></a>
+                                        
+                                                                                	 <!-- 										_______________________________________________________________________ -->
+										<div class="modal" th:id="'delete'+ ${categories.getId()}">
+											<div class="modal-dialog">
+												<div class="modal-content">
+
+													<!-- Modal Header -->
+													<div class="modal-header">
+														<h4 class="modal-title">Modal Heading</h4>
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+													</div>
+
+													<!-- Modal body -->
+													<div class="modal-body" th:text="'you sure to delete '+${categories.getTitle()}"></div>
+
+													<!-- Modal footer -->
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary"
+															data-dismiss="modal">Close</button>
+															<a type="button" class="btn btn-danger"
+															th:href="@{/admin/categories/delete/{id}(id=${categories.getId()})}">delete</a>
+													</div>
+
+												</div>
+											</div>
+										</div> <!--                             ____________________________________________________________________ -->
+				
+                                        </td>
+                                        <td><a th:href="@{/admin/categories/edit/{id}(id=${categories.getId()})}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>

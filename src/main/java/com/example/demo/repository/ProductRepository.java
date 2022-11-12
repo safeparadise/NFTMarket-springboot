@@ -13,4 +13,6 @@ Products findById(int id);
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM Products p ORDER BY likes DESC LIMIT 3 ")
 	List<Products> getFourNFT();
+	
+	void deleteById(int id);
 }

@@ -43,14 +43,14 @@ public class MainControllerProducts {
 		return "/AdminPanel/products.html";
 	}
 	
-	@RequestMapping("/product/add")
+	@RequestMapping("/products/add")
 	public String addNewProduct(Model model){
 		model.addAttribute("optionsCollection", collectionService.getAllcollection());
 		model.addAttribute("optionsCategory", categoryService.getAllCategorys());
 		return "AdminPanel/productEdit.html";
 	}
 	
-	@RequestMapping(value={"/registerProduct"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/products/save"}, method=RequestMethod.POST)
 	public String addProducts(@ModelAttribute Products product) throws IOException{
 		System.out.println("----------------------------------------");
 		productservice.uploadFile(product);
@@ -58,12 +58,18 @@ public class MainControllerProducts {
 		return "redirect:/admin/products";
 	}
 	
-	@RequestMapping(value="/product/edit/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/products/edit/{id}", method=RequestMethod.GET)
 	public String editProduct(Model model,@PathVariable("id") int id){
 		model.addAttribute("product",productservice.findByIdProduct(id));
 		model.addAttribute("optionsCollection", collectionService.getAllcollection());
 		model.addAttribute("optionsCategory", categoryService.getAllCategorys());
 		return "/AdminPanel/productEdit.html";
+	}
+	
+	@RequestMapping(value="products/delete/{id}",method=RequestMethod.GET)
+	public String delete(@PathVariable("id") int id){
+		 productservice.delete(id);
+		 return "redirect:/admin/products";
 	}
 	
 	@RequestMapping(value={"/editProductParams"}, method=RequestMethod.POST)

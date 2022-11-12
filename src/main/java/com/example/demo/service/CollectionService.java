@@ -37,6 +37,13 @@ public class CollectionService {
 	public Collection getCollection(int id){
 		return collectionRepository.findById(id);
 	}
+	
+	@Transactional
+	public String delete(int id){
+		 collectionRepository.deleteById(id);
+	return "";
+	}
+	
 //	public Collection addCollection(Collection collection){
 //		return collectionRepository.save(collection);
 //	}

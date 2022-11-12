@@ -3,6 +3,8 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,10 @@ public class UserService {
 	
 	public Users findByID(int id){
 		return userRepository.findByid(id);
+	}
+	@Transactional
+	public String delete(int id){
+		 userRepository.deleteById(id);
+	return "";
 	}
 }

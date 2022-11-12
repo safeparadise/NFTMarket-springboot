@@ -25,37 +25,26 @@
                 <!-- breadcrumb -->
                     <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
-                        <li class="breadcrumb-item active">products</li>
+                        <li class="breadcrumb-item active">authorities</li>
                     </ol>
                     <!-- body of the panel contain of content and tables ------------------------------------------>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            product inputs
+                            authorities inputs
                         </div>
 						<!-- this is for the edit page -->
-                        <div class="card-body" th:if="${product!=null}">
-                        <div class="row">
-	                        <div class="col-6">
-	                        <img th:src="'/img/' + ${product.img}" th:alt="${product.img}" width="100px"/>
-	                        </div>
-	                     </div>
+                        <div class="card-body" th:if="${authorities!=null}">
                         <form th:action="@{/admin/editProductParams}" method="post" enctype="multipart/form-data">
-                         <div class="row">
-	                        <div class="col-6">
-	                        <label>image</label><br>
-	                        <input type="file" name="file"  />
-	                        </div>
-	                      </div>
-	                      <input type="hidden"  name="id"  th:field="${product.id}">
+	                      <input type="hidden"  name="id"  th:field="${authorities.id}">
                         <div class="row">
 	                        <div class="col-6">
-	                        	<label>name</label><br>
-	                            <input type="text" placeholder="name" name="product_name" class="w-100" th:field="${product.product_name}">
+	                        	<label>username</label><br>
+	                            <input type="checkbox" placeholder="name" name="product_name" class="w-100" th:field="${authorities.product_name}">
 	                        </div>
 	                        <div class="col-6">
 	                         <label>price</label><br>
-	                            <input type="number" placeholder="price" name="price" class="w-100" th:field="${product.price}">
+	                            <input type="number" placeholder="price" name="price" class="w-100" th:field="${authorities.price}">
 	                        </div>
                         </div>
                         <div class="row">
@@ -89,44 +78,34 @@
                         </form>
                         </div>
 						<!--  this is for the adding product -->
-                        <div class="card-body" th:if="${product==null}">
-                        <form th:action="@{/admin/products/save}" method="post" enctype="multipart/form-data">
-                         <div class="row">
-	                        <div class="col-6">
-	                        <label>image</label><br>
-	                        <input type="file" name="file" />
-	                        </div>
-	                      </div>
+                        <div class="card-body" th:if="${authorities==null}">
+                        <form th:action="@{/admin/authorities/register}" method="get" >
+                        <label>what user can access to below authorities?</label><br>
                         <div class="row">
 	                        <div class="col-6">
-	                        	<label>name</label><br>
-	                            <input type="text" placeholder="name" name="product_name" class="w-100">
-	                        </div>
-	                        <div class="col-6">
-	                         <label>price</label><br>
-	                            <input type="number" placeholder="price" name="price" class="w-100">
+	                        	<select class="w-100 p-1" name="username">
+	                        		<option th:each="user : ${user}" th:value="${user.username}" th:text="${user.name}"></option>
+	                        	</select>
 	                        </div>
                         </div>
+                        <hr>
+                        <label>what access this user have?</label>
                         <div class="row">
 	                        <div class="col-6">
-	                        	<label>collection</label><br>
-	                            <select class="w-100 p-1" >
-	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
-	                            </select>
-	                        </div>
-	                        <div class="col-6">
-	                         <label>category</label><br>
-	                          <select class="w-100 p-1" >
-	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
-	                          </select>
-	                        </div>
-                        </div>
-                        <div class="row">
-	                        <div class="col-12">
-	                            <label>description</label><br>
-	                            <textarea type="text" placeholder="description" name="description" class="w-100" row="5"></textarea>
+	                        	 <input type="checkbox" value="1" name="authorities"> Admin Panel(read only)
+	                        	 <br>
+	                        	 <input type="checkbox" value="2" name="authorities"> User Detail
+	                        	 <br>
+	                        	 <input type="checkbox" value="3" name="authorities"> Products
+	                        	 <br>
+	                        	 <input type="checkbox" value="4" name="authorities"> Collections
+	                        	 <br>
+	                        	 <input type="checkbox" value="5" name="authorities"> Categories
+	                        	 <br>
+	                        	 <input type="checkbox" value="6" name="authorities"> Authorities  
 	                        </div>
                         </div>
+                        
                          <div class="row mt-2">
 	                        <div class="col-5">
 	                        <input type="submit" value="save" class="btn btn-primary"/>

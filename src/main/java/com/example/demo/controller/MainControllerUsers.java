@@ -28,11 +28,6 @@ public class MainControllerUsers {
 	public MainControllerUsers(UserService userservice){
 		this.userService= userservice;
 	}
-
-	@RequestMapping(value={"/loginUser"}, method=RequestMethod.GET)
-	public@ResponseBody Users addUsers(Users users){
-		return userService.addUser(users);
-	}
 	
 	@RequestMapping("/users")
 	public String usersAdminPanel(Model model){
@@ -40,13 +35,15 @@ public class MainControllerUsers {
 		return "/AdminPanel/users.html";
 	}
 	
-	@RequestMapping("/user/add")
+	@RequestMapping("/users/add")
 	public String userAdd(){
 		return "/AdminPanel/usersEdit.html";
 	}
 	
-	@RequestMapping("/user/create")
+	@RequestMapping("/users/save")
 	public String createUser(@ModelAttribute Users user){
+		System.out.println("this is the result --->"+user.getId());
+//		System.out.println("this is the result --->"+user.get());
 		userService.addUser(user);
 		return "redirect:/admin/users";
 	}
@@ -54,9 +51,19 @@ public class MainControllerUsers {
 	@RequestMapping(value="/users/edit/{id}",method=RequestMethod.GET )
 	public String usersEdit(Model model,@PathVariable("id") int id){
 		model.addAttribute("userDetails", userService.findByID(id));
-		System.out.println(userService.findByID(id).getId());
+		System.out.println("----------that is->"+userService.findByID(id).getId());
 		return "/AdminPanel/usersEdit.html";
 	}
 	
+	@RequestMapping(value="users/delete/{id}",method=RequestMethod.GET)
+	public String delete(@PathVariable("id") int id){
+		 userService.delete(id);
+		 return "redirect:/admin/users";
+	}
+	
+	@RequestMapping(value={"/loginUser"}, method=RequestMethod.GET)
+	public@ResponseBody Users addUsers(Users users){
+		return userService.addUser(users);
+	}
 //	/user/add
 }

@@ -45,6 +45,11 @@ public class ProductService {
 		return productRepository.getFourNFT();
 	}
 	
+	@Transactional
+	public String delete(int id){
+		 productRepository.deleteById(id);
+	return "";
+	}
 
 	@Transactional
 	public Products uploadFile(Products product) throws IOException {

@@ -25,36 +25,38 @@
                 <!-- breadcrumb -->
                     <ol class="breadcrumb mb-4 p-2 m-1">
                         <li class="breadcrumb-item active">Dashboard</li>
-                        <li class="breadcrumb-item active">collection</li>
+                        <li class="breadcrumb-item active">Authorities</li>
                     </ol>
                     <!-- body of the panel contain of content and tables ------------------------------------------>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="fas fa-table "></i>
-                            collection table
+                            DataTable Example
                         </div>
                         <div class="card-body">
-                        <a th:href="@{/admin/collections/add}" class="btn btn-primary m-3">Add New </a>
+                          <a th:href="@{/admin/authorities/add}" class="btn btn-primary m-3">Add New </a>
                             <table class="table table-striped text-center" >
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>creator</th>
                                         <th>Name</th>
+                                        <th>Username</th>
+                                        <th>Mobile</th>
                                         <th>Delete</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="collections : ${collections}">
-                                        <td th:text="${collections.getId()}"></td>
-                                        <td th:text="${collections.getCreator()}"></td>
-                                        <td th:text="${collections.getName()}"></td>
+                                    <tr th:each="authorities : ${authorities}">
+                                        <td th:text="${authorities.getId()}"></td>
+                                        <td th:text="${authorities.getUsername()}"></td>
+                                        <td th:text="${authorities.getAuthorities()}"></td>
+                                        <td>61</td>
                                         <td><a href="#" data-toggle="modal"
-										th:data-target="'#delete'+ ${collections.getId()}"><i class="fa fa-times text-danger"></i></a>
-                                        
-                                          	 <!-- 										_______________________________________________________________________ -->
-										<div class="modal" th:id="'delete'+ ${collections.getId()}">
+										th:data-target="'#delete'+ ${authorities.getId()}"><i class="fa fa-times text-danger"></i></a>
+										
+										                                          	 <!-- 										_______________________________________________________________________ -->
+										<div class="modal" th:id="'delete'+ ${authorities.getId()}">
 											<div class="modal-dialog">
 												<div class="modal-content">
 
@@ -65,24 +67,23 @@
 													</div>
 
 													<!-- Modal body -->
-													<div class="modal-body" th:text="'you sure to delete '+${collections.getName()}"></div>
+													<div class="modal-body" th:text="'you sure to delete '+${authorities.getUsername()}"></div>
 
 													<!-- Modal footer -->
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary"
 															data-dismiss="modal">Close</button>
 															<a type="button" class="btn btn-danger"
-															th:href="@{/admin/collections/delete/{id}(id=${collections.getId()})}">delete</a>
+															th:href="@{/admin/authorities/delete/{id}(id=${authorities.getId()})}">delete</a>
 													</div>
 
 												</div>
 											</div>
 										</div> <!--                             ____________________________________________________________________ -->
 				
-                                        
-                                        
-                                        </td>
-                                        <td><a th:href="@{/admin/collection/edit/{id}(id=${collections.getId()})}"><i class="fa fa-edit"></i></a></td>
+										
+										</td>
+                                        <td><a th:href="@{/admin/authorities/edit/{id}(id=${authorities.getId()})}"><i class="fa fa-edit"></i></a></td>
                                     </tr>
                                 </tbody>
                             </table>

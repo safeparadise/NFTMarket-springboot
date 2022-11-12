@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.models.Authorities;
 import com.example.demo.service.CollectionService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
@@ -24,7 +25,7 @@ public class Router {
 		this.collectionService = collectionService;
 		this.userService = userService;
 	}
-	
+
 	@RequestMapping("/")
 	public String index(Model model){
 		model.addAttribute("nfts",productservice.gettingFour());
@@ -32,6 +33,12 @@ public class Router {
 		model.addAttribute("users", userService.getThree());
 		return "/NFTMarket/index.html";
 	}
+	
+	@RequestMapping("/login")
+	public String login(Model model){
+		return "/AdminPanel/loginAdminPanel.html";
+	}
+	
 	@RequestMapping("/redirect")
 	public String redirectToHomePage(Model model){
 		model.addAttribute("products",productservice.getAllProducts());
@@ -77,8 +84,9 @@ public class Router {
 		model.addAttribute("products",productservice.findByIdProduct(id));
 		return "/form/productreg.html";
 	}
-	@RequestMapping("/login" )
-	public String login(){
-		return "/user/login.html";
+	@RequestMapping(value="/admin/x", method=RequestMethod.GET)
+	public String getting(Authorities auto){
+		System.out.println(auto);
+		return "";
 	}
 }

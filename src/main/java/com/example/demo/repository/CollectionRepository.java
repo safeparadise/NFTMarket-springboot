@@ -13,4 +13,6 @@ public interface CollectionRepository extends JpaRepository<Collection, Long>{
 	List<Collection> getThreeCollection();
 	
 	Collection findById(int id);
+	
+	void deleteById(int id);
 }
