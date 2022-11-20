@@ -62,12 +62,14 @@
 	                        <div class="col-6">
 	                        	<label>collection</label><br>
 	                            <select class="w-100 p-1" >
+	                            <option>choose one of collections</option>
 	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
 	                            </select>
 	                        </div>
 	                        <div class="col-6">
 	                         <label>category</label><br>
 	                          <select class="w-100 p-1" >
+	                          <option>choose one of categories</option>
 	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
 	                          </select>
 	                        </div>
@@ -80,12 +82,20 @@
                         </div>
                          <div class="row mt-2">
 	                        <div class="col-6">
-	                        <input type="submit" value="save changes" class="btn btn-primary"/>
+	                        <input type="submit" value="save" class="btn btn-primary w-100"/>
 	                        </div>
 	                        <div class="col-6">
-	                        <input type="submit" value="cancel" class="btn btn-danger"/>
+	                        	<a class="btn btn-danger w-100" th:href="@{/admin/products}">cancel</a>
 	                        </div>
 	                     </div>
+<!--                          <div class="row mt-2"> -->
+<!-- 	                        <div class="col-6"> -->
+<!-- 	                        <input type="submit" value="save changes" class="btn btn-primary"/> -->
+<!-- 	                        </div> -->
+<!-- 	                        <div class="col-6"> -->
+<!-- 	                        <input type="submit" value="cancel" class="btn btn-danger"/> -->
+<!-- 	                        </div> -->
+<!-- 	                     </div> -->
                         </form>
                         </div>
 						<!--  this is for the adding product -->
@@ -111,13 +121,15 @@
 	                        <div class="col-6">
 	                        	<label>collection</label><br>
 	                            <select class="w-100 p-1" >
+	                             <option>choose one of collections</option>
 	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
 	                            </select>
 	                        </div>
 	                        <div class="col-6">
 	                         <label>category</label><br>
 	                          <select class="w-100 p-1" >
-	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
+	                          <option>choose one of categories</option>
+	                          <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
 	                          </select>
 	                        </div>
                         </div>
@@ -127,11 +139,19 @@
 	                            <textarea type="text" placeholder="description" name="description" class="w-100" row="5"></textarea>
 	                        </div>
                         </div>
-                         <div class="row mt-2">
-	                        <div class="col-5">
-	                        <input type="submit" value="save" class="btn btn-primary"/>
+                           <div class="row mt-2">
+	                        <div class="col-6">
+	                        <input type="submit" value="save" class="btn btn-primary w-100"/>
+	                        </div>
+	                        <div class="col-6">
+	                        	<a class="btn btn-danger w-100" th:href="@{/admin/products}">cancel</a>
 	                        </div>
 	                     </div>
+<!--                          <div class="row mt-2"> -->
+<!-- 	                        <div class="col-5"> -->
+<!-- 	                        <input type="submit" value="save" class="btn btn-primary"/> -->
+<!-- 	                        </div> -->
+<!-- 	                     </div> -->
                         </form>
                         </div>
                     </div>

@@ -24,7 +24,7 @@ public class Users implements Serializable {
 	private String name;
 	private String password;
 	private String username;
-	private boolean enabled= true;
+	private boolean enabled;
 
 	public String getPassword() {
 		return password;
@@ -34,15 +34,6 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
-	
-//	public int getEnabled() {
-//		return enabled;
-//	}
-//
-//	public void setEnabled(int enabled) {
-//		this.enabled = enabled;
-//	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -51,21 +42,6 @@ public class Users implements Serializable {
 		this.enabled = enabled;
 	}
 
-
-//	@ElementCollection(targetClass = Roles.class)
-//	@CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"))
-//	@Enumerated(EnumType.STRING)
-//	private List<Roles> authorities ;
-//
-//	public List<Roles> getRoles() {
-//		return authorities ;
-//	}
-//
-//	public void setRoles(List<Roles> roles) {
-//		this.authorities  = roles;
-//	}
-
-	
 	public Users() {
 		super();
 	}

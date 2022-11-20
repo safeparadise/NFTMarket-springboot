@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,12 @@ public class MainControllerUsers {
 		model.addAttribute("userDetails", userService.findByID(id));
 		System.out.println("----------that is->"+userService.findByID(id).getId());
 		return "/AdminPanel/usersEdit.html";
+	}
+	
+	@RequestMapping("/users/update")
+	public String updateUser(@ModelAttribute Users user) throws IllegalAccessException, InvocationTargetException{
+		userService.updateUsers(user);
+		return "redirect:/admin/users";
 	}
 	
 	@RequestMapping(value="users/delete/{id}",method=RequestMethod.GET)

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,7 @@ public class MainControllerProducts {
 	}
 	
 	@RequestMapping(value={"/products/save"}, method=RequestMethod.POST)
-	public String addProducts(@ModelAttribute Products product) throws IOException{
+	public String addProducts(@ModelAttribute Products product) throws IOException, IllegalAccessException, InvocationTargetException{
 		System.out.println("----------------------------------------");
 		productservice.uploadFile(product);
 		System.out.println("----------------------------------------");
@@ -73,7 +74,7 @@ public class MainControllerProducts {
 	}
 	
 	@RequestMapping(value={"/editProductParams"}, method=RequestMethod.POST)
-	public String editProductParams(@ModelAttribute Products product) throws IOException{
+	public String editProductParams(@ModelAttribute Products product) throws IOException, IllegalAccessException, InvocationTargetException{
 		System.out.println("----------------------------------------");
 		productservice.uploadFile(product);
 		System.out.println("----------------------------------------");

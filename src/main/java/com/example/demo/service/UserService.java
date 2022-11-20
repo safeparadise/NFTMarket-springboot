@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.models.Users;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.tools.ApacheBeanUtils;
 
 @Service
 public class UserService {
@@ -39,5 +41,15 @@ public class UserService {
 	public String delete(int id){
 		 userRepository.deleteById(id);
 	return "";
+	}
+	
+	public Users updateUsers(Users users) throws IllegalAccessException, InvocationTargetException{
+		if(users.getUsername() != null){
+			Users exist = userRepository.findByid(users.getId());
+			ApacheBeanUtils abu = new ApacheBeanUtils();
+			abu.copyProperties(exist, users);
+			return userRepository.save(exist);
+		}
+		return userRepository.save(users);
 	}
 }
