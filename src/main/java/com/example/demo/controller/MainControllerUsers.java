@@ -1,21 +1,15 @@
 package com.example.demo.controller;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.models.Products;
 import com.example.demo.models.Users;
 import com.example.demo.service.UserService;
 
@@ -72,5 +66,4 @@ public class MainControllerUsers {
 	public@ResponseBody Users addUsers(Users users){
 		return userService.addUser(users);
 	}
-//	/user/add
 }

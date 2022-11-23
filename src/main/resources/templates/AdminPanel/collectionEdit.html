@@ -54,16 +54,19 @@
 	                        	<input type="text" th:field="${collection.name}" name="name" placeholder="name" class="w-100">
 	                        </div>
 	                        <div class="col-6">
-	                         <label>creator</label><br>
-	                         <input type="text" th:field="${collection.creator}" name="creator" placeholder="creator" class="w-100">
+	                           <label>creator</label><br>
+	                          <select class="w-100 p-1" id="s" name="creator">
+	                            <option>choose one of creators</option>
+	                            <option th:each="optionUsers : ${optionUsers}" th:value="${optionUsers.id}" th:text="${optionUsers.name}" ></option>
+	                          </select>
 	                        </div>
                         </div>
                          <div class="row mt-2">
 	                        <div class="col-6">
-	                        <input type="submit" value="save changes" class="btn btn-primary w-100"/>
+	                        <input type="submit" value="save" class="btn btn-primary w-100"/>
 	                        </div>
 	                        <div class="col-6">
-	                        	<input type="submit" value="cancel" class="btn btn-danger w-100"/>
+	                        	<a class="btn btn-danger w-100" th:href="@{/admin/collections}">cancel</a>
 	                        </div>
 	                     </div>
                         </form>
@@ -88,16 +91,19 @@
 	                        	<input type="text" name="name" placeholder="name" class="w-100">
 	                        </div>
 	                        <div class="col-6">
-	                         <label>creator</label><br>
-	                         <input type="text" name="creator" placeholder="creator" class="w-100">
+	                          <label>creator</label><br>
+	                          <select class="w-100 p-1" name="creator">
+	                          <option value="0">choose one of creators</option>
+	                            <option th:each="optionUsers : ${optionUsers}"  th:text="${optionUsers.name}" th:value="${optionUsers.id}"></option>
+	                          </select>
 	                        </div>
                         </div>
-                        <div class="row mt-2">
+                          <div class="row mt-2">
 	                        <div class="col-6">
 	                        <input type="submit" value="save" class="btn btn-primary w-100"/>
 	                        </div>
 	                        <div class="col-6">
-	                        <input type="submit" value="cancel" class="btn btn-danger w-100"/>
+	                        	<a class="btn btn-danger w-100" th:href="@{/admin/collections}">cancel</a>
 	                        </div>
 	                     </div>
                         </form>

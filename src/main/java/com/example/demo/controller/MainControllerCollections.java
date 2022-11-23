@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.models.Collection;
 import com.example.demo.service.CollectionService;
+import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class MainControllerCollections {
 
 	private CollectionService collectionService;
+	private UserService userService;
 	
 	@Autowired
-	public MainControllerCollections(CollectionService collectionService){
+	public MainControllerCollections(CollectionService collectionService, UserService userService){
 		this.collectionService = collectionService;
+		this.userService = userService;
 	}
 	
 	@RequestMapping("/collections")
@@ -30,12 +34,13 @@ public class MainControllerCollections {
 	}
 	
 	@RequestMapping("/collections/add")
-	public String collectionAdd(){
+	public String collectionAdd(Model model){
+		model.addAttribute("optionUsers", userService.getAllUsers());
 		return "/AdminPanel/collectionEdit.html";
 	}
 	
 	@RequestMapping("/collections/save")
-	public String createCollection(Collection collection) throws IOException{
+	public String createCollection(Collection collection) throws IOException, IllegalAccessException, InvocationTargetException{
 		collectionService.addCollection(collection);
 		return "redirect:/admin/collections";
 	}
@@ -43,6 +48,7 @@ public class MainControllerCollections {
 	@RequestMapping("/collections/edit/{id}")
 	public String collectionEdit(@PathVariable("id") int id, Model model){
 		model.addAttribute("collection", collectionService.getCollection(id));
+		model.addAttribute("optionUsers", userService.getAllUsers());
 		return "/AdminPanel/collectionEdit.html";
 	}
 	
