@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.models.Categorys;
 import com.example.demo.models.Collection;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("admin")
 public class MainControllerCategory {
 
 	private CategoryService categorysService;
+	private UserService userService;
 	
 	@Autowired
-	public MainControllerCategory(CategoryService categoryService){
+	public MainControllerCategory(CategoryService categoryService, UserService usersService){
 		this.categorysService = categoryService;
+		this.userService = usersService;
 	}
 	
 	@RequestMapping("/categories")
@@ -30,7 +35,8 @@ public class MainControllerCategory {
 	}
 	
 	@RequestMapping("/categories/add")
-	public String addingCategory(){
+	public String addingCategory(Model model){
+		model.addAttribute("optionCateories", userService.getAllUsers());
 		return "/AdminPanel/categoryEdit.html";
 	}
 	
@@ -43,6 +49,7 @@ public class MainControllerCategory {
 	@RequestMapping(value="/categories/edit/{id}", method=RequestMethod.GET)
 	public String editingTheCategory(Model model, @PathVariable("id") int id){
 		model.addAttribute("categories", categorysService.editById(id));
+		model.addAttribute("optionCateories", userService.getAllUsers());
 		return "/AdminPanel/categoryEdit.html";
 	}
 	
@@ -53,13 +60,10 @@ public class MainControllerCategory {
 		 
 	}
 	
-	@RequestMapping(value="/editCategoryParams", method=RequestMethod.GET)
-	public String saveChange(@ModelAttribute Categorys category){
-		System.out.println("----------------------------------");
-		System.out.println(category.getId());
-		System.out.println("----------------------------------");
-		categorysService.addCategory(category);
-		return "redirect:/admin/categoryies";
+	@RequestMapping(value="/categories/update", method=RequestMethod.GET)
+	public String saveChange(@ModelAttribute Categorys category) throws IllegalAccessException, InvocationTargetException{
+		categorysService.updateCategory(category);
+		return "redirect:/admin/categories";
 	}
 	
 //	editCategoryParams

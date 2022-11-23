@@ -61,14 +61,14 @@
                         <div class="row">
 	                        <div class="col-6">
 	                        	<label>collection</label><br>
-	                            <select class="w-100 p-1" >
+	                            <select class="w-100 p-1" name="collection">
 	                            <option>choose one of collections</option>
 	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
 	                            </select>
 	                        </div>
 	                        <div class="col-6">
 	                         <label>category</label><br>
-	                          <select class="w-100 p-1" >
+	                          <select class="w-100 p-1" name="category">
 	                          <option>choose one of categories</option>
 	                            <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
 	                          </select>
@@ -120,15 +120,15 @@
                         <div class="row">
 	                        <div class="col-6">
 	                        	<label>collection</label><br>
-	                            <select class="w-100 p-1" >
-	                             <option>choose one of collections</option>
+	                            <select class="w-100 p-1" name="collection">
+	                             <option value="0">choose one of collections</option>
 	                            <option th:each="optionsCollection : ${optionsCollection}" th:value="${optionsCollection.id}" th:text="${optionsCollection.name}" ></option>
 	                            </select>
 	                        </div>
 	                        <div class="col-6">
 	                         <label>category</label><br>
-	                          <select class="w-100 p-1" >
-	                          <option>choose one of categories</option>
+	                          <select class="w-100 p-1" name="category">
+	                          <option value="0">choose one of categories</option>
 	                          <option th:each="optionsCategory : ${optionsCategory}" th:value="${optionsCategory.id}" th:text="${optionsCategory.title}" ></option>
 	                          </select>
 	                        </div>
