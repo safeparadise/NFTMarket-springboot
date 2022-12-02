@@ -1,9 +1,14 @@
 package com.example.demo.models;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -13,13 +18,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="collection")
-public class Collection {
+public class Collection implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int creator;
-	private String name;
+	private String name_collection;
 	private String cover;
+	
+    public Users getUsersDetails() {
+		return usersDetails;
+	}
+
+	public void setUsersDetails(Users usersDetails) {
+		this.usersDetails = usersDetails;
+	}
+
+	@ManyToOne
+    @JoinColumn(name="users")//
+    private Users usersDetails;
 	
 	@JsonIgnore
 	@Transient
@@ -37,13 +54,16 @@ public class Collection {
 		super();
 	}
 	
-	public Collection(int id, int creator, String name, String creator_img, String cover) {
+	public Collection(int id, int creator, String name_collection, String cover, Users usersDetails, MultipartFile file) {
 		super();
 		this.id = id;
 		this.creator = creator;
-		this.name = name;
+		this.name_collection = name_collection;
 		this.cover = cover;
+		this.usersDetails = usersDetails;
+		this.file = file;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -57,12 +77,12 @@ public class Collection {
 		this.creator = creator;
 	}
 
-	public String getName() {
-		return name;
+	public String getName_collection() {
+		return name_collection;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName_collection(String name_collection) {
+		this.name_collection = name_collection;
 	}
 
 	public String getCover() {

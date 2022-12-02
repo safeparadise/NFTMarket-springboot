@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -15,21 +17,36 @@ import org.springframework.util.ResourceUtils;
 
 import com.example.demo.models.Collection;
 import com.example.demo.models.Products;
+import com.example.demo.models.Users;
 import com.example.demo.repository.CollectionRepository;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.tools.ApacheBeanUtils;
 
 @Service
 public class CollectionService {
 
 	private CollectionRepository collectionRepository;
+	private UserService userService;
 	
 	@Autowired
-	public CollectionService(CollectionRepository collectionRepository) {
+	public CollectionService(CollectionRepository collectionRepository, UserService userServices) {
 		super();
 		this.collectionRepository = collectionRepository;
+		this.userService = userServices;
 	}
 	
 	public List<Collection> getThreeCollection(){
+//		List<Collection> collecttionList = collectionRepository.getThreeCollection();
+//		Integer newArr[] = new Integer[3];
+//		for(int i =0; i<collecttionList.size();i++){
+//			System.out.println(collecttionList.get(i).getCreator());
+//			newArr[i] = collecttionList.get(i).getCreator();
+//		}
+//		System.out.println(newArr[0]);
+//		List<Users> usersList = userService.getThreeCreatorCollections(newArr);
+//		List<Object> newList = Stream.concat(collecttionList.stream(), usersList.stream())
+//                .collect(Collectors.toList());
+//		return newList;
 		return collectionRepository.getThreeCollection();
 	}
 	public List<Collection> getAllcollection(){

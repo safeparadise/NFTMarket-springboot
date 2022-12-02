@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.models.Authorities;
+import com.example.demo.models.Collection;
 import com.example.demo.service.CollectionService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
@@ -29,7 +33,20 @@ public class Router {
 	@RequestMapping("/")
 	public String index(Model model){
 		model.addAttribute("nfts",productservice.gettingFour());
+//		List<Object[]> collect = collectionService.getThreeCollection();
+////		Integer newArr[] = new Integer[3];
+////		for(int i =0; i<collect.size();i++){
+////			System.out.println(collect.get(i).getCreator());
+////			newArr[i] = collect.get(i).getCreator();
+////		}
+//		for (int i=0; i<collect.size(); i++){
+//			   Object[] row = (Object[]) collect.get(i);
+//			   System.out.println("Element "+i+Arrays.toString(row));
+//			}
+//		
+//		System.out.println("____________________________________________"+collect.get(1).length);
 		model.addAttribute("collection", collectionService.getThreeCollection());
+//		model.addAttribute("authurCollections",userService.getThreeCreatorCollections(newArr) );
 		model.addAttribute("users", userService.getThree());
 		return "/NFTMarket/index.html";
 	}

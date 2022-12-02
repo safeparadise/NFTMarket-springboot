@@ -43,6 +43,10 @@ public class UserService {
 	return "";
 	}
 	
+	public List<Users> getThreeCreatorCollections(Integer newArr[]){
+		return userRepository.getThreeCreatorCollections(newArr[0], newArr[1], newArr[2]);
+	} 
+	
 	public Users updateUsers(Users users) throws IllegalAccessException, InvocationTargetException{
 		if(users.getUsername() != null){
 			Users exist = userRepository.findByid(users.getId());
