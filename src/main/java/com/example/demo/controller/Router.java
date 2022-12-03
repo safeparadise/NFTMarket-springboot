@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.models.Authorities;
 import com.example.demo.models.Collection;
+import com.example.demo.models.Users;
 import com.example.demo.service.CollectionService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.UserService;
@@ -72,23 +73,37 @@ public class Router {
 	}
 	
 	@RequestMapping("/productsList")
-	public String productsList(){
+	public String productsList(Model model){
+		model.addAttribute("products", productservice.getAllProducts());
 		return "/NFTMarket/marketplace.html";
 	}
 	
 	@RequestMapping("/collectionList")
-	public String collectionList(){
+	public String collectionList(Model model){
+		model.addAttribute("collection", collectionService.getAllcollection());
 		return "/NFTMarket/collection.html";
 	}
 	
 	@RequestMapping("/artists")
-	public String artists(){
+	public String artists(Model model){
+		model.addAttribute("users", userService.getAllUsers());
 		return "/NFTMarket/artists.html";
 	}
 	
-	@RequestMapping("/uploadFile")
-	public String uploadFile(){
-		return "uploadFile.html";
+	@RequestMapping("/loginCllients")
+	public String loginusers(){
+		return "/NFTMarket/login.html";
+	}
+	
+	@RequestMapping(value="/createCllients", method=RequestMethod.POST)
+	public String createUsers(Users users){
+		userService.addUser(users);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/registerCllients")
+	public String registerClient(){
+		return "/NFTMarket/register.html";
 	}
 	
 	@RequestMapping(value="/contactus", method=RequestMethod.GET)
@@ -96,11 +111,13 @@ public class Router {
 		model.addAttribute("products",productservice.findByIdProduct(id));
 		return "/form/productreg.html";
 	}
+	
 	@RequestMapping(value="/aboutus", method=RequestMethod.GET)
 	public String editProduct3(Model model,@PathVariable("id") int id){
 		model.addAttribute("products",productservice.findByIdProduct(id));
 		return "/form/productreg.html";
 	}
+	
 	@RequestMapping(value="/admin/x", method=RequestMethod.GET)
 	public String getting(Authorities auto){
 		System.out.println(auto);

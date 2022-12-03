@@ -34,6 +34,7 @@ public class Springconfig extends WebSecurityConfigurerAdapter {
 	 .authorizeRequests().antMatchers(
 	 "/","/css/**","/js/**","/img/**","/loginUser/**","/users/**","/webfonts/**",
 	 "/productsList/**","/collectionList/**","/artists/**"
+	 ,"/loginCllients"
 //	 "/uploadFile/**","/get/**",
 //	 "/productsTbl","/pro","/product/**","/edit/**","/notfound/**","/redirect"
 //	 ,"/uploadfile/**","/up/**"
@@ -47,12 +48,8 @@ public class Springconfig extends WebSecurityConfigurerAdapter {
 	 .antMatchers("/admin/authorities/**").hasAuthority("6")
 //	 .antMatchers("/sjdj").hasAnyRole("programmer")
 //	 .antMatchers("/sws").hasAnyRole("admin","secoundadmin")
-	 .anyRequest().authenticated().and().formLogin().loginPage("/login").usernameParameter("username").permitAll().and().logout().permitAll()
-	 .and().exceptionHandling().accessDeniedPage("/AdminPanel/loginAdminPanel.html");
+	 .anyRequest().authenticated().and().formLogin().loginPage("/loginCllients").usernameParameter("username").permitAll().and().logout().permitAll()
+	 .and().exceptionHandling().accessDeniedPage("/NFTMarket/login.html");
 	 }
-
-//	 public static String ret(){
-//		 return "";
-//	 }
 }
 

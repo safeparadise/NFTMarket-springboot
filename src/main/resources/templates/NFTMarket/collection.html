@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
       <div class="container mt-5 mb-5">
         <div class="d-flex flex-row">
           <div class="w-100">
-            <h3 class="text-white text-center mb-5">marketplace</h3><br>
+            <h3 class="text-white text-center mb-5">Collections</h3><br>
           </div>
         </div>
       </div>
@@ -31,43 +31,58 @@
             </div>
             <hr style="height:1px;border-width:0;color:gray;background-color:gray">
             <div class="row text-white mt-5">
-
-		 <div class="col-lg-4 mb-4 ">
+            
+            
+            <div class="col-lg-4 mb-4" th:each="collection : ${collection}">
           <div class="card bg-uploadbox b-radius">
-            <img src="https://i.pinimg.com/564x/62/45/8b/62458bd1baedfd76c2698c0504ea7958.jpg" alt="" class="card-img-top p-3 position-relative">
+            <img th:src="'/img/'+${collection.getCover()}" alt="" class="card-img-top p-3 position-relative">
             <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" >
               <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).webp" alt="" class="w-25 card-img-top rounded-circle" >
             </div>
             <div class="card-body text-center">
-                <h5 class="card-title">Sunset</h5>
-                <p class="card-text">Lorem ipsum dolor </p> 
+              <h5 class="card-title" th:text="${collection.getCreator()}"></h5>
+              <p class="card-text" th:text="${collection.getName_collection()}"></p> 
             </div>
            </div>
           </div>
-          <div class="col-lg-4 mb-4 ">
-            <div class="card bg-uploadbox b-radius">
-              <img src="https://i.pinimg.com/564x/e2/27/cb/e227cbe1df51a6aafb674a2b47a6c020.jpg" alt="" class="card-img-top p-3 position-relative">
-              <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" >
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).webp" alt="" class="w-25 card-img-top rounded-circle" >
-              </div>
-              <div class="card-body text-center">
-                <h5 class="card-title">Sunset</h5>
-                <p class="card-text">Lorem ipsum dolor </p> 
-              </div>
-             </div>
-            </div>
-            <div class="col-lg-4 mb-4 ">
-              <div class="card bg-uploadbox b-radius">
-                <img src="https://i.pinimg.com/564x/c5/3b/d2/c53bd2e3e855ec52131781ca3cfb05b3.jpg" alt="" class="card-img-top p-3 position-relative">
-                <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" >
-                  <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).webp" alt="" class="w-25 card-img-top rounded-circle" >
-                </div>
-                <div class="card-body text-center">
-                  <h5 class="card-title">Sunset</h5>
-                  <p class="card-text">Lorem ipsum dolor </p> 
-                </div>
-               </div>
-              </div>
+            
+
+<!-- 		 <div class="col-lg-4 mb-4 "> -->
+<!--           <div class="card bg-uploadbox b-radius"> -->
+<!--             <img src="https://i.pinimg.com/564x/62/45/8b/62458bd1baedfd76c2698c0504ea7958.jpg" alt="" class="card-img-top p-3 position-relative"> -->
+<!--             <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" > -->
+<!--               <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(20).webp" alt="" class="w-25 card-img-top rounded-circle" > -->
+<!--             </div> -->
+<!--             <div class="card-body text-center"> -->
+<!--                 <h5 class="card-title">Sunset</h5> -->
+<!--                 <p class="card-text">Lorem ipsum dolor </p>  -->
+<!--             </div> -->
+<!--            </div> -->
+<!--           </div> -->
+<!--           <div class="col-lg-4 mb-4 "> -->
+<!--             <div class="card bg-uploadbox b-radius"> -->
+<!--               <img src="https://i.pinimg.com/564x/e2/27/cb/e227cbe1df51a6aafb674a2b47a6c020.jpg" alt="" class="card-img-top p-3 position-relative"> -->
+<!--               <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" > -->
+<!--                 <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).webp" alt="" class="w-25 card-img-top rounded-circle" > -->
+<!--               </div> -->
+<!--               <div class="card-body text-center"> -->
+<!--                 <h5 class="card-title">Sunset</h5> -->
+<!--                 <p class="card-text">Lorem ipsum dolor </p>  -->
+<!--               </div> -->
+<!--              </div> -->
+<!--             </div> -->
+<!--             <div class="col-lg-4 mb-4 "> -->
+<!--               <div class="card bg-uploadbox b-radius"> -->
+<!--                 <img src="https://i.pinimg.com/564x/c5/3b/d2/c53bd2e3e855ec52131781ca3cfb05b3.jpg" alt="" class="card-img-top p-3 position-relative"> -->
+<!--                 <div class="rounded-circle position-absolute d-flex flex-row justify-content-center w-100 align-items-end h-75" > -->
+<!--                   <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).webp" alt="" class="w-25 card-img-top rounded-circle" > -->
+<!--                 </div> -->
+<!--                 <div class="card-body text-center"> -->
+<!--                   <h5 class="card-title">Sunset</h5> -->
+<!--                   <p class="card-text">Lorem ipsum dolor </p>  -->
+<!--                 </div> -->
+<!--                </div> -->
+<!--               </div> -->
 
             </div>
            </div>

@@ -26,6 +26,7 @@ public class Products {
 	private int collection;
 	private int likes;
 	private int showing ;
+	private String urlNft;
 	
 	@Transient
 	@JsonIgnore
@@ -36,7 +37,7 @@ public class Products {
 	}
 
 	public Products(int id, String product_name, int price, String description, String img, int category, int creator,
-			int collection, int likes, int view) {
+			int collection, int likes, int showing, String urlNft, MultipartFile file) {
 		super();
 		this.id = id;
 		this.product_name = product_name;
@@ -47,7 +48,17 @@ public class Products {
 		this.creator = creator;
 		this.collection = collection;
 		this.likes = likes;
-		this.showing = view;
+		this.showing = showing;
+		this.urlNft = urlNft;
+		this.file = file;
+	}
+	
+	public String getUrlNft() {
+		return urlNft;
+	}
+
+	public void setUrlNft(String urlNft) {
+		this.urlNft = urlNft;
 	}
 
 	public int getCategory() {
